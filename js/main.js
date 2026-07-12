@@ -58,6 +58,22 @@
     }
   }
 
+  function renderScrollGallery(images, label) {
+    const multiClass = images.length > 1 ? ' scroll-gallery--multi' : '';
+    return `
+      <div class="scroll-gallery${multiClass}" tabindex="0" role="region" aria-label="Photos of ${label}">
+        <div class="scroll-gallery__track">
+          ${images.map((src) => `
+            <figure class="scroll-gallery__slide">
+              <img src="${src}" alt="${label}" data-fallback loading="lazy" decoding="async">
+            </figure>
+          `).join('')}
+        </div>
+        <p class="scroll-gallery__hint" aria-hidden="true">Scroll for more photos</p>
+      </div>
+    `;
+  }
+
   function renderRoutes() {
     const container = document.getElementById('routes-list');
     if (!container) return;
@@ -69,13 +85,26 @@
           <h3 class="route__name">${route.name}</h3>
         </div>
         <p class="route__note">${route.note}</p>
-        <div class="route__thumbs" aria-label="Photos of ${route.name}">
-          ${route.thumbs.map((src) => `
-            <div class="route__thumb">
-              <img src="${src}" alt="${route.name}" data-fallback loading="lazy" decoding="async">
-            </div>
-          `).join('')}
+        ${renderScrollGallery(route.thumbs, route.name)}
+      </article>
+    `).join('');
+
+    bindImageFallbacks(container);
+  }
+
+  function renderHikes() {
+    const container = document.getElementById('hikes-list');
+    if (!container) return;
+
+    container.innerHTML = HIKES.map((hike) => `
+      <article class="route hike">
+        <div class="route__header">
+          <span class="route__dot" aria-hidden="true"></span>
+          <h3 class="route__name">${hike.name}</h3>
+          ${hike.duration ? `<span class="hike__duration">${hike.duration}</span>` : ''}
         </div>
+        <p class="route__note">${hike.note}</p>
+        ${renderScrollGallery(hike.images, hike.name)}
       </article>
     `).join('');
 
@@ -191,6 +220,7 @@
     initWhatsAppLinks();
     initHero();
     renderRoutes();
+    renderHikes();
     renderSeasons();
     renderGallery();
     renderTestimonials();

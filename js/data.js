@@ -85,6 +85,30 @@ const ROUTES = [
   },
 ];
 
+const HIKES = [
+  {
+    slug: 'multi-day-backcountry',
+    name: 'Multi-day backcountry treks',
+    duration: '3–7 days',
+    note: 'These are the trips that take real planning — routes into mountains most visitors never see. We carry packs, groceries, and everything we need for several days on the trail. Sometimes porters join us for the longer ones.',
+    images: ['1', '2', '3', '4'].map((n) => `assets/images/hikes/multi-day-backcountry-${n}.jpg`),
+  },
+  {
+    slug: 'high-pass-crossing',
+    name: 'High pass crossings on foot',
+    duration: '4–6 days',
+    note: 'Not every pass has a road. Some of the best ones you walk over — high altitude, long days, and camps where the only light is stars. You need to be fit and ready for thin air.',
+    images: ['1', '2', '3', '4'].map((n) => `assets/images/hikes/high-pass-crossing-${n}.jpg`),
+  },
+  {
+    slug: 'village-to-village',
+    name: 'Village-to-village walks',
+    duration: '2–5 days',
+    note: 'Slower than driving, but you see what the jeep never shows you — orchards, irrigation channels, the way people actually live up here. We plan the food and lodging ahead; you bring good boots and an open schedule.',
+    images: ['1', '2', '3', '4'].map((n) => `assets/images/hikes/village-to-village-${n}.jpg`),
+  },
+];
+
 const GALLERY = [
   { label: 'Nubra Valley — sand dunes', ratio: '4/5', rotate: -3, src: 'assets/images/gallery/nubra-valley.jpg' },
   { label: 'Tashi with guests, Pangong Lake', ratio: '1/1', rotate: 2, src: 'assets/images/gallery/pangong-guests.jpg' },

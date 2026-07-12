@@ -50,6 +50,13 @@ assets/images/routes/alchi-monastery-1.jpg … -4.jpg
 assets/images/routes/wari-la-1.jpg … -4.jpg
 ```
 
+### Hikes (4 photos each)
+```
+assets/images/hikes/multi-day-backcountry-1.jpg … -4.jpg
+assets/images/hikes/high-pass-crossing-1.jpg … -4.jpg
+assets/images/hikes/village-to-village-1.jpg … -4.jpg
+```
+
 ### Seasons (1 photo each)
 ```
 assets/images/seasons/spring.jpg
@@ -78,14 +85,15 @@ index.html          Main page
 css/styles.css      Styles
 js/
   config.js         Site settings (WhatsApp, analytics)
-  data.js           Routes, gallery, seasons content
+  data.js           Routes, hikes, gallery, seasons content
   main.js           Interactivity (carousel, seasons, rendering)
 assets/
   favicon.svg
   images/
     hero/           Hero slideshow
     portrait/       Tashi portrait
-    routes/         Route thumbnails (upload here)
+    routes/         Route photos (upload here)
+    hikes/          Hike photos (upload here)
     seasons/        Season photos (upload here)
     gallery/        Gallery photos (upload here)
     placeholder.svg Fallback for missing images

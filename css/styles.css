@@ -18,6 +18,7 @@
   --max-content: 720px;
   --max-hero: 920px;
   --nav-height: 52px;
+  --content-padding-x: clamp(20px, 5vw, 28px);
 }
 
 *,
@@ -41,6 +42,12 @@ html {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .hero__content {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.95);
   }
 }
 
@@ -228,7 +235,7 @@ a {
 .content {
   max-width: var(--max-content);
   margin: 0 auto;
-  padding: clamp(28px, 6vw, 64px) clamp(20px, 5vw, 28px) 100px;
+  padding: clamp(28px, 6vw, 64px) var(--content-padding-x) 100px;
 }
 
 .section-label {
@@ -259,7 +266,7 @@ a {
 
 .about__portrait {
   flex: 0 0 auto;
-  width: clamp(130px, 30vw, 168px);
+  width: clamp(130px, 30vw, 190px);
   aspect-ratio: 4/5;
   border: 6px solid var(--cream);
   box-shadow: 0 6px 16px rgba(51, 41, 31, 0.18);
@@ -331,6 +338,7 @@ a {
   display: flex;
   align-items: baseline;
   gap: 10px;
+  width: 100%;
 }
 
 .route__dot {
@@ -356,35 +364,59 @@ a {
   margin: 6px 0 0;
 }
 
-.route__thumbs {
-  display: flex;
-  gap: 8px;
+/* Scroll gallery (routes & hikes) */
+.scroll-gallery {
   margin-top: 14px;
-  flex-wrap: wrap;
+  outline: none;
 }
 
-.route__thumb {
-  flex: 1;
-  max-width: 110px;
-  min-width: 72px;
-  aspect-ratio: 1;
+.scroll-gallery__track {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.scroll-gallery__track::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-gallery__slide {
+  flex: 0 0 clamp(320px, 52vw, 400px);
+  aspect-ratio: 16 / 10;
+  margin: 0;
+  scroll-snap-align: start;
   border-radius: 3px;
   overflow: hidden;
   background: #d8d2c4;
 }
 
-.route__thumb img {
+.scroll-gallery__slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   filter: sepia(0.18) saturate(0.85);
 }
 
-.route__thumb img.is-placeholder {
+.scroll-gallery__slide img.is-placeholder {
   filter: none;
   object-fit: contain;
-  padding: 8px;
+  padding: 16px;
   background: #d8d2c4;
+}
+
+.scroll-gallery__hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 8px 0 0;
+  display: none;
+}
+
+.scroll-gallery--multi .scroll-gallery__hint {
+  display: block;
 }
 
 .routes__closing {
@@ -394,6 +426,38 @@ a {
   color: var(--text-muted);
   margin-top: 36px;
   text-align: center;
+}
+
+/* Hikes */
+.hikes {
+  margin-top: 72px;
+  scroll-margin-top: var(--nav-height);
+}
+
+.hikes__list {
+  margin-top: 40px;
+}
+
+.hikes__prep {
+  font-family: var(--font-head);
+  font-size: clamp(16px, 2.4vw, 18px);
+  line-height: 1.55;
+  color: var(--text-body);
+  margin-top: 28px;
+  padding: 18px 20px;
+  background: var(--cream);
+  border: 1px dashed var(--border-dashed);
+  border-radius: 4px;
+}
+
+.hike__duration {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-left: auto;
+  flex: none;
 }
 
 /* Seasons */
@@ -685,7 +749,81 @@ a {
 /* Footer */
 .footer {
   text-align: center;
-  padding: 0 clamp(20px, 5vw, 28px) 40px;
+  padding: 0 var(--content-padding-x) 40px;
   font-size: 12px;
   color: var(--text-muted);
+}
+
+/* Mobile layout */
+@media (max-width: 640px) {
+  .hero {
+    min-height: clamp(440px, 72vh, 520px);
+  }
+
+  .hero__overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.92) 0%,
+      rgba(255, 255, 255, 0.88) 55%,
+      rgba(255, 255, 255, 0.45) 80%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  .hero__content {
+    max-width: none;
+    margin-top: clamp(24px, 6vw, 40px);
+    padding: 20px var(--content-padding-x) 28px;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 0;
+  }
+
+  .about {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about__portrait {
+    width: clamp(200px, 65vw, 280px);
+    margin: 0 auto;
+  }
+
+  .about__text {
+    min-width: 0;
+  }
+
+  .section-intro {
+    max-width: none;
+  }
+
+  .pull-quote {
+    margin-top: 56px;
+  }
+
+  .scroll-gallery {
+    margin-inline: calc(-1 * var(--content-padding-x));
+  }
+
+  .scroll-gallery__track {
+    gap: 0;
+  }
+
+  .scroll-gallery__slide {
+    flex: 0 0 100vw;
+    aspect-ratio: 4 / 3;
+    border-radius: 0;
+  }
+
+  .scroll-gallery--multi .scroll-gallery__hint {
+    display: block;
+  }
+}
+
+@media (min-width: 641px) {
+  .scroll-gallery__hint {
+    display: none;
+  }
 }
